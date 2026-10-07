@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=ooscp-bin
+_pkgname=ooscp
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Cryptographically validated secure file copy over SSH protocol with bandwidth caps."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/ooscp"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('ooscp')
+conflicts=('ooscp')
+source_x86_64=("${url}/releases/download/v${pkgver}/ooscp-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/ooscp-linux-x86_64" "${pkgdir}/usr/bin/ooscp"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/ooscp-uninstall"
+}
